@@ -140,7 +140,7 @@ export default function MVPSection({ onNext }: MVPSectionProps) {
                 </GlassCard>
                 <GlassCard className="p-4 text-center">
                   <p className="text-gray-400 text-xs mb-1">Stack</p>
-                  <p className="text-white font-bold text-lg">TypeScript + AI</p>
+                  <p className="text-white font-bold text-lg">Next.js + TypeScript</p>
                 </GlassCard>
                 <GlassCard className="p-4 text-center">
                   <p className="text-gray-400 text-xs mb-1">Status</p>
@@ -428,7 +428,7 @@ export default function MVPSection({ onNext }: MVPSectionProps) {
                     </div>
 
                     {/* Message d'erreur */}
-                    {state.errors && state.errors.length > 0 && (
+                    {state.errors && Object.keys(state.errors).length > 0 && (
                       <motion.p
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}

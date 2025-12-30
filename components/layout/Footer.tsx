@@ -28,7 +28,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row items-center gap-4">
             {/* Bouton 1 : Repo MVP */}
             <motion.a
-              href="YOUR_MVP_GITHUB_URL"
+              href="https://github.com/lemaitregabinpro-creator/MVP-Chat"
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 10 }}
@@ -54,7 +54,7 @@ export default function Footer() {
 
             {/* Bouton 2 : Repo Portfolio */}
             <motion.a
-              href="YOUR_PORTFOLIO_GITHUB_URL"
+              href="https://github.com/lemaitregabinpro-creator/Landing-page"
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 10 }}

@@ -140,7 +140,18 @@ export default function MVPSection({ onNext }: MVPSectionProps) {
                 </GlassCard>
                 <GlassCard className="p-4 text-center">
                   <p className="text-gray-400 text-xs mb-1">Stack</p>
-                  <p className="text-white font-bold text-lg">Next.js + TypeScript</p>
+                  <div className="flex items-center justify-center gap-2">
+                    <p className="text-white font-bold text-lg">Next.js + TypeScript</p>
+                    <span className="
+                      px-2 py-0.5 rounded-md
+                      bg-purple-500/20
+                      border border-purple-500/50
+                      text-purple-400 font-bold text-xs
+                      shadow-[0_0_10px_rgba(139,92,246,0.3)]
+                    ">
+                      AI
+                    </span>
+                  </div>
                 </GlassCard>
                 <GlassCard className="p-4 text-center">
                   <p className="text-gray-400 text-xs mb-1">Status</p>
@@ -205,11 +216,31 @@ export default function MVPSection({ onNext }: MVPSectionProps) {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-8"
+                    className="text-center py-8 space-y-4"
                   >
-                    <p className="text-neon-green text-lg font-semibold">
-                      Message transmis. Le protocole est lancé. Merci pour votre feedback.
-                    </p>
+                    {pillChoice === 'red' ? (
+                      <>
+                        <h3 className="text-red-400 text-xl font-bold">
+                          Mode : BUILDER activé 🛠️
+                        </h3>
+                        <p className="text-gray-300 text-base">
+                          Message reçu. J&apos;espère que vous aimez l&apos;efficacité autant que moi. Prêt à déployer ce mindset chez Weliive.
+                        </p>
+                      </>
+                    ) : pillChoice === 'blue' ? (
+                      <>
+                        <h3 className="text-cyan-400 text-xl font-bold">
+                          Mode : CREATOR activé ✨
+                        </h3>
+                        <p className="text-gray-300 text-base">
+                          Message envoyé. La technique n&apos;est rien sans une bonne histoire. Hâte de vous raconter la suite de vive voix.
+                        </p>
+                      </>
+                    ) : (
+                      <p className="text-neon-green text-lg font-semibold">
+                        Message transmis. Le protocole est lancé. Merci pour votre feedback.
+                      </p>
+                    )}
                   </motion.div>
                 ) : (
                   <form onSubmit={handleFormSubmit} className="space-y-8">

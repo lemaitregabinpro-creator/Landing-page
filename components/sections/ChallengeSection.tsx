@@ -48,7 +48,7 @@ export default function ChallengeSection({ onNext }: ChallengeSectionProps) {
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.7 }}
-                className="relative w-full h-full bg-black/40 rounded-[20px]"
+                className="relative w-full h-full rounded-[20px]"
               >
                 <Image
                   src="/images/challenge-source.png"
@@ -156,7 +156,7 @@ export default function ChallengeSection({ onNext }: ChallengeSectionProps) {
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.9 }}
-                className="relative w-full h-full bg-black/40 rounded-[20px]"
+                className="relative w-full h-full rounded-[20px]"
               >
                 <Image
                   src="/images/mail-go.jpeg"

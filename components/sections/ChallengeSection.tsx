@@ -120,7 +120,7 @@ export default function ChallengeSection({ onNext }: ChallengeSectionProps) {
             {/* 5. Ligne verticale de connexion (vers le bas) */}
             <div className="w-0.5 h-12 bg-gradient-to-b from-neon-green/30 to-neon-green/20" />
 
-            {/* 6. Badge "Fin : 19h24" (Tout en bas) */}
+            {/* 6. Badge "Fin : 18h24" (Tout en bas) */}
             <div
               className="
                 px-3 py-1 rounded-full
@@ -131,7 +131,7 @@ export default function ChallengeSection({ onNext }: ChallengeSectionProps) {
                 shadow-[0_0_10px_rgba(0,255,136,0.2)]
               "
             >
-              Fin : 19h24
+              Fin : 18h24
             </div>
           </div>
 

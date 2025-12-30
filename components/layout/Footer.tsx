@@ -113,7 +113,7 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-xs text-gray-600 font-mono mt-8"
           >
-            © 2024 Built with Next.js & Tailwind CSS.
+            © {new Date().getFullYear()} Built with Next.js, TypeScript & Tailwind CSS.
           </motion.p>
         </div>
       </div>

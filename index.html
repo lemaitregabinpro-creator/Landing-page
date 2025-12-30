@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weliive - Storytelling Landing Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --deep-blue: #0a0e27;
+            --dark-purple: #1a0d2e;
+            --neon-green: #00ff88;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--dark-purple) 50%, #000 100%);
+            color: #fff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Scroll Snap Container */
+        .scroll-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+
+        section {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 191, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Glass Card Style */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* SECTION 1: INTRO OVERLAY */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease-out;
+        }
+
+        #intro-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .typewriter {
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .typewriter-line {
+            margin: 0.5rem 0;
+            opacity: 0;
+            animation: typewriter 1.5s steps(40) forwards;
+        }
+
+        .typewriter-line:nth-child(1) { animation-delay: 0s; }
+        .typewriter-line:nth-child(2) { animation-delay: 2s; }
+        .typewriter-line:nth-child(3) { animation-delay: 4s; }
+
+        @keyframes typewriter {
+            to { opacity: 1; }
+        }
+
+        /* SECTION 2: PROFIL */
+        #profil {
+            flex-direction: column;
+            gap: 3rem;
+            padding: 2rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+            z-index: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .card {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.5s; }
+        .card:nth-child(2) { animation-delay: 0.7s; }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .big-number {
+            font-size: 5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--neon-green), #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .chart-container {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 10px;
+            padding: 1rem;
+        }
+
+        .chart-bar {
+            width: 30px;
+            background: linear-gradient(to top, var(--neon-green), #00ccff);
+            border-radius: 5px 5px 0 0;
+            animation: growUp 1.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .chart-bar:nth-child(1) { height: 30%; animation-delay: 0.1s; }
+        .chart-bar:nth-child(2) { height: 50%; animation-delay: 0.2s; }
+        .chart-bar:nth-child(3) { height: 70%; animation-delay: 0.3s; }
+        .chart-bar:nth-child(4) { height: 90%; animation-delay: 0.4s; }
+        .chart-bar:nth-child(5) { height: 100%; animation-delay: 0.5s; }
+
+        @keyframes growUp {
+            from {
+                opacity: 0;
+                transform: scaleY(0);
+            }
+            to {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+        }
+
+        .btn {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 2rem;
+        }
+
+        .btn:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* SECTION 3: AUDIT IA */
+        #audit {
+            flex-direction: column;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .audio-player-container {
+            max-width: 600px;
+            width: 100%;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .audio-player {
+            position: relative;
+            padding: 2rem;
+        }
+
+        .audio-info {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            border: 2px solid var(--neon-green);
+            color: var(--neon-green);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-green), #00ccff);
+            width: 0%;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* SECTION 4: MVP REVEAL */
+        #mvp {
+            flex-direction: column;
+            gap: 3rem;
+            padding: 2rem;
+        }
+
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background: #000;
+            border-radius: 40px;
+            padding: 15px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--deep-blue), var(--dark-purple));
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phone-content {
+            text-align: center;
+            padding: 2rem;
+            color: #fff;
+        }
+
+        .phone-content h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--neon-green), #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .phone-content p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .cta-neon {
+            background: linear-gradient(135deg, var(--neon-green), #00ccff);
+            color: #000;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 
+                0 0 30px rgba(0, 255, 136, 0.5),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+            z-index: 1;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.7s forwards;
+        }
+
+        .cta-neon:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 0 40px rgba(0, 255, 136, 0.7),
+                inset 0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+
+            .phone-mockup {
+                width: 250px;
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SECTION 1: INTRO OVERLAY -->
+    <div id="intro-overlay">
+        <div class="typewriter">
+            <div class="typewriter-line">> Target: Weliive...</div>
+            <div class="typewriter-line">> Challenge Accepted...</div>
+            <div class="typewriter-line">> Build time: 4h.</div>
+        </div>
+    </div>
+
+    <!-- Scroll Container -->
+    <div class="scroll-container">
+        <!-- SECTION 2: PROFIL -->
+        <section id="profil">
+            <div class="animated-bg"></div>
+            <div style="width: 100%; max-width: 1200px; text-align: center;">
+                <h1 class="section-title">01. The Fast-Track Profile</h1>
+                <div class="cards-container">
+                    <div class="glass-card card">
+                        <h3>3 Mois d'XP</h3>
+                        <div class="big-number">3</div>
+                        <p style="color: rgba(255, 255, 255, 0.7); text-align: center;">
+                            Mois d'expérience intensive
+                        </p>
+                    </div>
+                    <div class="glass-card card">
+                        <h3>Learning Curve Verticale</h3>
+                        <div class="chart-container">
+                            <div class="chart-bar"></div>
+                            <div class="chart-bar"></div>
+                            <div class="chart-bar"></div>
+                            <div class="chart-bar"></div>
+                            <div class="chart-bar"></div>
+                        </div>
+                        <p style="color: rgba(255, 255, 255, 0.7); text-align: center; margin-top: 1rem;">
+                            Progression exponentielle
+                        </p>
+                    </div>
+                </div>
+                <a href="#" class="btn">Voir CV</a>
+            </div>
+        </section>
+
+        <!-- SECTION 3: AUDIT IA -->
+        <section id="audit">
+            <div class="animated-bg"></div>
+            <div style="width: 100%; max-width: 1200px; text-align: center;">
+                <h1 class="section-title">02. Weliive AI Audit</h1>
+                <div class="audio-player-container">
+                    <div class="glass-card audio-player">
+                        <div class="audio-info">
+                            <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">
+                                Podcast généré par NotebookLM à partir de vos données.
+                            </p>
+                        </div>
+                        <div class="audio-controls">
+                            <button class="play-btn" id="playBtn">▶</button>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="time-display">
+                            <span id="currentTime">0:00</span>
+                            <span id="duration">0:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: MVP REVEAL -->
+        <section id="mvp">
+            <div class="animated-bg"></div>
+            <div style="width: 100%; max-width: 1200px; text-align: center;">
+                <h1 class="section-title">03. The Proof</h1>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="phone-content">
+                            <h2>MVP Weliive</h2>
+                            <p>
+                                Application mobile révolutionnaire
+                                prête à être déployée.
+                            </p>
+                            <div style="margin-top: 2rem; font-size: 3rem;">📱</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="cta-neon" id="launchBtn">Lancer le MVP</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Intro Overlay Fade Out
+        window.addEventListener('DOMContentLoaded', () => {
+            const overlay = document.getElementById('intro-overlay');
+            setTimeout(() => {
+                overlay.classList.add('fade-out');
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 1000);
+            }, 6000);
+        });
+
+        // Audio Player Simulation
+        const playBtn = document.getElementById('playBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        
+        let isPlaying = false;
+        let progress = 0;
+        let interval;
+
+        // Simulate audio duration (3 minutes)
+        const totalDuration = 180; // seconds
+        durationEl.textContent = formatTime(totalDuration);
+
+        playBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            playBtn.textContent = isPlaying ? '⏸' : '▶';
+            
+            if (isPlaying) {
+                interval = setInterval(() => {
+                    progress += 0.5;
+                    if (progress >= totalDuration) {
+                        progress = totalDuration;
+                        isPlaying = false;
+                        playBtn.textContent = '▶';
+                        clearInterval(interval);
+                    }
+                    updateProgress();
+                }, 500);
+            } else {
+                clearInterval(interval);
+            }
+        });
+
+        function updateProgress() {
+            const percentage = (progress / totalDuration) * 100;
+            progressFill.style.width = percentage + '%';
+            currentTimeEl.textContent = formatTime(progress);
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Scroll animations on section enter
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for fade-in
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Launch MVP Button
+        document.getElementById('launchBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('🚀 MVP Launch Sequence Initiated!');
+        });
+    </script>
+</body>
+</html>

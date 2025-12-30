@@ -281,7 +281,7 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
                       textShadow: '0 0 10px rgba(16, 185, 129, 0.8), 0 0 20px rgba(16, 185, 129, 0.4)',
                     }}
                   >
-                    // INITIATING_NEURAL_LINK
+                    {'// INITIATING_NEURAL_LINK'}
                   </span>
                 </div>
                 

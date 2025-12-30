@@ -38,11 +38,7 @@ export default function Home() {
           transition={{ duration: 0.5, ease: 'easeInOut' }}
           className="h-full w-full"
         >
-          {currentSlide === 0 ? (
-            <CurrentComponent onComplete={handleNext} />
-          ) : (
-            <CurrentComponent onNext={handleNext} />
-          )}
+          <CurrentComponent onNext={handleNext} />
         </motion.div>
       </AnimatePresence>
     </div>

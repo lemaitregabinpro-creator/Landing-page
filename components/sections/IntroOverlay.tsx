@@ -4,10 +4,10 @@ import { useEffect, useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface IntroOverlayProps {
-  onComplete?: () => void
+  onNext?: () => void
 }
 
-export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
+export default function IntroOverlay({ onNext }: IntroOverlayProps) {
   const [isVisible, setIsVisible] = useState(true)
   const [cursorVisible, setCursorVisible] = useState(true)
   const [line1, setLine1] = useState('')
@@ -112,8 +112,8 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
           timeoutId = setTimeout(() => {
             if (isMounted) {
               setIsVisible(false)
-              if (onComplete) {
-                setTimeout(() => onComplete(), 1000)
+              if (onNext) {
+                setTimeout(() => onNext(), 1000)
               }
             }
           }, 1500)
@@ -128,7 +128,7 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
       isMounted = false
       clearTimeout(timeoutId)
     }
-  }, [onComplete])
+  }, [onNext])
 
   // Animation du curseur clignotant (rythme rapide)
   useEffect(() => {
